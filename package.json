@@ -5,7 +5,7 @@
   "icon": "./icon.png",
   "main": "index.js",
   "scripts": {
-    "test": "test.js",
+    "test": "node test.js",
     "example": "node example/hello-world.js"
   },
   "repository": {
