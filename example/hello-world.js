@@ -73,8 +73,7 @@ require(["text!data/swords.json", "builtins/storage", "builtins/loader", "data-u
             var card = createElementsFromHTML(html)[0];
             document.querySelector(".card-list").appendChild(card);
         } catch (exception) {
-            console.warn(exception);
-            console.log(content);
+            console.log.apply(null, arguments);
         }
     }
     loader.onload(async function () {
