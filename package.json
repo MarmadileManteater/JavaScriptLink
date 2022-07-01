@@ -1,0 +1,35 @@
+{
+  "name": "javascript-link",
+  "version": "0.13.0",
+  "description": "A tool to link javascript files and resources together into one javascript or HTML file",
+  "icon": "./icon.png",
+  "main": "index.js",
+  "scripts": {
+    "test": "test.js",
+    "example": "node example/hello-world.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MarmadileManteater/JavaScriptLink"
+  },
+  "bin": {
+    "javascript-link": "index.js"
+  },
+  "keywords": [
+    "tool",
+    "javascript",
+    "html"
+  ],
+  "author": "MarmadileManteater",
+  "license": "MIT",
+  "dependencies": {
+    "requirejs": "^2.3.6",
+    "text": "https://github.com/MarmadileManteater/requirejs-text-nodejs",
+    "xml2js-parser": "^1.1.1"
+  },
+  "devDependencies": {
+    "geckodriver": "^3.0.1",
+    "html-validator": "^6.0.0",
+    "nightwatch": "^2.1.0"
+  }
+}

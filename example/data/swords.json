@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Magic Blade",
+        "might": 25,
+        "hit": 100,
+        "description": "Wow, shiny!"
+    },
+    {
+        "name": "Bronze Sword",
+        "might": 5,
+        "hit": 85,
+        "description": "A sword"
+    }
+]
