@@ -12,7 +12,7 @@ describe('test', function() {
     }
     it('do the page logs match what should be expected given the example folder?', function(browser) {
       browser
-        .url('file://' + __dirname + '/output/output.html')
+        .url('file://' + __dirname,replaceAll('\\', '/') + '/output/output.html')
         .waitForElementVisible('.card', 4000)
         .elements('css selector', '.card-list [class="card"]', function (logEntries) {
             log(JSON.stringify(logEntries.value, null, 2))
