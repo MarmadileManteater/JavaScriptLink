@@ -6,6 +6,8 @@ name: Test
 on:
 
   # Allows you to run this workflow manually from the Actions tab
+  push:
+    development
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -20,11 +22,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: Install node dependencies
-        run: npm i
-
       - name: Setup Geckodriver
         uses: browser-actions/setup-geckodriver@latest
+
+      - name: Install node dependencies
+        run: npm i
 
       - name: Run test script in package.json
         run: npm test
