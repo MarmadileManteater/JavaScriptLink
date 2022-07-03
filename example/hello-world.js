@@ -31,7 +31,10 @@ require(["text!data/swords.json", "builtins/storage", "builtins/loader", "data-u
         div.innerHTML = html;
         return div.children;
     }
-    var print = function (content, title = null, referenceMedia = null, colCount = 12, textareaHeight = 'auto') {
+    var print = function (content, title = null, referenceMedia = null, colCount = 12, textareaHeight = 'auto', credit = {}) {
+        if (typeof textareaHeight === 'object') {
+            credit = textareaHeight;
+        }
         try {
             var html = cardHTML;
             html = html.replace("<!-- Columns -->", colCount.toString());
@@ -49,10 +52,32 @@ require(["text!data/swords.json", "builtins/storage", "builtins/loader", "data-u
                         audio.src = referenceMedia;
                         audio.setAttribute("controls","");
                         mediaHTML = audio.outerHTML;
+                        if (Object.keys(credit).indexOf("author") !== -1 && Object.keys(credit).indexOf("source") !== -1) {
+                            var a = document.createElement("a");
+                            a.setAttribute("href", credit["source"]);
+                            a.setAttribute("title", "author: " + credit["author"]);
+                            a.appendChild(audio);
+                            var span = document.createElement("span");
+                            span.setAttribute("class", "under");
+                            span.innerHTML = "author: " + credit["author"];
+                            a.appendChild(span);
+                            mediaHTML = a.outerHTML;
+                        }
                     } else if (referenceMedia.startsWith("data:image")) {
                         var img = document.createElement("img");
                         img.src = referenceMedia;
                         mediaHTML = img.outerHTML;
+                        if (Object.keys(credit).indexOf("author") !== -1 && Object.keys(credit).indexOf("source") !== -1) {
+                            var a = document.createElement("a");
+                            a.setAttribute("href", credit["source"]);
+                            a.setAttribute("title", "author: " + credit["author"]);
+                            a.appendChild(img);
+                            var span = document.createElement("span");
+                            span.setAttribute("class", "under");
+                            span.innerHTML = "author: " + credit["author"];
+                            a.appendChild(span);
+                            mediaHTML = a.outerHTML;
+                        }
                     } else {
                         mediaHTML = "<textarea style=\"height: " + textareaHeight + "px;\">" + referenceMedia.toString() + "</textarea>";
                         html = html.replace("<!-- JSON -->", mediaHTML);
@@ -91,9 +116,9 @@ require(["text!data/swords.json", "builtins/storage", "builtins/loader", "data-u
         var testField = await storage.get("test-field");
         print("This is a piece of data stored in local storage:", null, testField, 6);
         print("This is how to display a linked image.", null, `require(["data-uri!img/parallax-forest-preview.png"], async function (forestPreview) {\r  var image = document.createElement('img');\r  image.src = forestPreview;\r  document.body.appendChild(image);\r});`, 6);
-        print("", null, imageUri, 6);
+        print("", null, imageUri, 6, { "author": "ansimuz", "source": "https://opengameart.org/content/forest-background" });
         print("This is how to display a linked audio file.", null, `require(["data-uri!music/desert_loop.mp3"], async function (desertLoop) {\r  var audio = document.createElement('audio');\r  audio.src = desertLoop;\r  document.body.appendChild(audio);\r});`, 6);
-        print("", null, desertLoopUri, 6);
+        print("", null, desertLoopUri, 6, { "author": "iamoneabe", "source": "https://opengameart.org/content/desert-loop" });
     });
 
 });

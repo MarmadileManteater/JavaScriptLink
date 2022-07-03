@@ -59,8 +59,8 @@ textarea {
     min-height: 2.5rem;
 }
 
-.card img + h1 + p,
-.card audio + h1 + p {
+.card a + h1 + p,
+.card a + h1 + p {
     min-height: 0;
 }
 
@@ -95,6 +95,11 @@ textarea {
 
 .user-card span {
     vertical-align: middle;
+}
+
+span.under {
+    display: block;
+    margin-top: -20px;
 }
 
 @media (prefers-color-scheme: dark) {
