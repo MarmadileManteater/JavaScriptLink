@@ -85,7 +85,7 @@ This is how to retrieve data from a JSON file.`,
                     description: "This is a piece of data stored in local storage:",
                     referenceMedia: 
 `{
-  "location": "file://` + __dirname + `/output/output.html",
+  "location": "file://` + __dirname.replaceAll("\\", "/") + `/output/output.html",
   "integer": 23
 }`
                 },
