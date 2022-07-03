@@ -23,12 +23,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: Update package.json version
-        uses: jossef/action-set-json-field@v1
+      - name: Get Version Number
+        uses: nyaayaya/package-version@v1
         with:
-          file: package.json
-          field: version
-          value: ${{ steps.versionNumber.outputs.result }}
+          path: 'package.json'
+          follow-symlinks: false
 
       - name: Setup Geckodriver
         uses: browser-actions/setup-geckodriver@latest
