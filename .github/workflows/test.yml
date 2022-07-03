@@ -23,9 +23,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: Read package.json
-        uses: dutscher/read-package-json-endpoint-actions@v1.33.7
-        id: package-json-endpoint
+      - name: Read node from package.json
+        uses: culshaw/read-package-node-version-actions@v2.0.0
+        with: 
+          path: "package.json"
+        id: package-node-version
 
       - name: Setup Geckodriver
         uses: browser-actions/setup-geckodriver@latest
@@ -40,5 +42,5 @@ jobs:
         uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: nightwatch-test-results-${{ steps.package-json-endpoint.outputs.endpoint }}-${{ github.run_number }}
+          name: nightwatch-test-results-${{ steps.package-version.outputs.version }}-${{ github.run_number }}
           path: tests_output\nightwatch-html-report
