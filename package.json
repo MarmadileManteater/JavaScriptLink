@@ -24,7 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "requirejs": "^2.3.6",
-    "text": "https://github.com/MarmadileManteater/requirejs-text-nodejs",
+    "text": "https://github.com/MarmadileManteater/RequireJSTextNodeJS.git",
     "xml2js-parser": "^1.1.1"
   },
   "devDependencies": {
