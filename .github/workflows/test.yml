@@ -36,5 +36,5 @@ jobs:
         uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: nightwatch-test-results
+          name: nightwatch-test-results-${{ github.event.number }}
           path: tests_output\nightwatch-html-report
