@@ -38,9 +38,14 @@ jobs:
       - name: Run test script in package.json
         run: npm test
 
+      - name: Copy the output to the results directory
+        run: |
+          cp output/output.html tests_output/nightwatch-html-report
+
       - name: Upload the test results
         uses: actions/upload-artifact@v2
         if: always()
         with:
           name: nightwatch-test-results-${{ env.PACKAGE_VERSION }}-${{ github.run_number }}
           path: tests_output\nightwatch-html-report
+          
