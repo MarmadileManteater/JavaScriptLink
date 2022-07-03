@@ -123,7 +123,7 @@ This is how to retrieve data from a JSON file.`,
                 }
             ];
             logEntries = logEntries.value;
-            browser.assert.equal(logEntries.length, cards.length, (logEntries.length > cards.length?"Too many":"Too few") + " logs based on the example folder");
+            browser.assert.equal(logEntries.length, cards.length, (logEntries.length === cards.length)?"Just the right amount of":(logEntries.length > cards.length?"Too many":"Too few") + " logs based on the example folder");
             for (var i = 0; i < logEntries.length; i++) {
                 var logEntry = logEntries[i];
                 logEntry.key = i;
