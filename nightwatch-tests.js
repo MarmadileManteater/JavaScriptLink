@@ -141,7 +141,7 @@ This is how to retrieve data from a JSON file.`,
                             });
                         } else if (Object.keys(cards[logEntry.key]).indexOf('title') == -1) {
                             // There is supposed to be a title here
-                            browser.assert.not.equals(cards[logEntry.key].title, undefined, "There is supposed to be a title here")
+                            browser.assert.not.equals(cards[logEntry.key].title, undefined)
                         }
 
                     });
@@ -156,11 +156,11 @@ This is how to retrieve data from a JSON file.`,
                                 if (cards[logEntry.key].description === null) {
                                     cards[logEntry.key].description = ""
                                 }
-                                browser.assert.equal(text.value, cards[logEntry.key].description, "Description of card #" + (logEntry.key + 1).toString() + " does not match")
+                                browser.assert.equal(text.value, cards[logEntry.key].description, "Description of card #" + (logEntry.key + 1).toString())
                             });
                         } else if (Object.keys(cards[logEntry.key]).indexOf('description') == -1) {
                             // There is supposed to be a description here
-                            browser.assert.not.equals(cards[logEntry.key].description, undefined, "There is supposed to be a description here")
+                            browser.assert.not.equals(cards[logEntry.key].description, undefined)
                         }
 
                     });
@@ -176,14 +176,14 @@ This is how to retrieve data from a JSON file.`,
                                     cards[logEntry.key].referenceMedia = ""
                                 }
                                 if (cards[logEntry.key].referenceMedia.startsWith('data:image')) {
-                                    browser.assert.equal(text.value, cards[logEntry.key].referenceMedia, "Image of card #" + (logEntry.key + 1).toString() + " does not match")
+                                    browser.assert.equal(text.value, cards[logEntry.key].referenceMedia, "Image of card #" + (logEntry.key + 1).toString())
                                 }
                             });
                         } else if (Object.keys(cards[logEntry.key]).indexOf('referenceMedia') == -1) {
                             // There is supposed to be an image here
                             if (cards[logEntry.key].referenceMedia !== undefined && cards[logEntry.key].referenceMedia !== null) {
                                 if (cards[logEntry.key].referenceMedia.startsWith('data:image')) {
-                                    browser.assert.not.equals(cards[logEntry.key].referenceMedia, undefined, "There is supposed to be an image here")
+                                    browser.assert.not.equals(cards[logEntry.key].referenceMedia, undefined)
                                 }
                             }
                         }
@@ -203,14 +203,14 @@ This is how to retrieve data from a JSON file.`,
                                 if (!cards[logEntry.key].referenceMedia.startsWith('data:audio') && !cards[logEntry.key].referenceMedia.startsWith('data:image')) {
                                     log(text.value);
                                     log(text.value + "\r\n" + cards[logEntry.key].referenceMedia);
-                                    browser.assert.equal(text.value, cards[logEntry.key].referenceMedia, "Textarea of card #" + (logEntry.key + 1).toString() + " does not match")
+                                    browser.assert.equal(text.value, cards[logEntry.key].referenceMedia, "Textarea of card #" + (logEntry.key + 1).toString())
                                 }
                             });
                         } else if (Object.keys(cards[logEntry.key]).indexOf('referenceMedia') == -1) {
                             // There is supposed to be audio here
                             if (cards[logEntry.key].referenceMedia !== undefined && cards[logEntry.key].referenceMedia !== null) {
                                 if (!cards[logEntry.key].referenceMedia.startsWith('data:audio') && !cards[logEntry.key].referenceMedia.startsWith('data:image')) {
-                                    browser.assert.not.equals(cards[logEntry.key].referenceMedia, undefined, "There is supposed to be audio here")
+                                    browser.assert.not.equals(cards[logEntry.key].referenceMedia, undefined)
                                 }
                             }
                         }
@@ -228,14 +228,14 @@ This is how to retrieve data from a JSON file.`,
                                     cards[logEntry.key].referenceMedia = ""
                                 }
                                 if (cards[logEntry.key].referenceMedia.startsWith('data:audio')) {
-                                    browser.assert.equal(text.value, cards[logEntry.key].referenceMedia, "Audio of card #" + (logEntry.key + 1).toString() + " does not match")
+                                    browser.assert.equal(text.value, cards[logEntry.key].referenceMedia, "Audio of card #" + (logEntry.key + 1).toString())
                                 }
                             });
                         } else if (Object.keys(cards[logEntry.key]).indexOf('referenceMedia') == -1) {
                             // There is supposed to be audio here
                             if (cards[logEntry.key].referenceMedia !== undefined && cards[logEntry.key].referenceMedia !== null) {
                                 if (cards[logEntry.key].referenceMedia.startsWith('data:audio')) {
-                                    browser.assert.not.equals(cards[logEntry.key].referenceMedia, undefined, "There is supposed to be audio here")
+                                    browser.assert.not.equals(cards[logEntry.key].referenceMedia, undefined)
                                 }
                             }
                         }
