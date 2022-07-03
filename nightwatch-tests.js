@@ -21,7 +21,7 @@ describe('test', function() {
                     title: "JavaScript Link Example",
                     description: 
 `A CLI tool for transpiling a directory of resources into a target output file
-View on GitHub»`
+View on GitHubÂ»`
                 },
                 {
                     title: "Usage:",
