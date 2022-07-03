@@ -31,3 +31,9 @@ jobs:
 
       - name: Run test script in package.json
         run: npm test
+
+      - name: Upload the test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: nightwatch-test-results.html
+          path: tests_output\nightwatch-html-report\index.html
