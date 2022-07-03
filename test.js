@@ -38,7 +38,7 @@ require(["link", "fs", "html-validator", "child_process"], function (link, fileS
             throw new Error(error.message);
         }
         if (stderr) {
-            throw new Error(stderr);
+            console.log(stderr);
         }
         console.log(stdout);
     });
