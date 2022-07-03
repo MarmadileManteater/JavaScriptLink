@@ -137,7 +137,7 @@ This is how to retrieve data from a JSON file.`,
                                 if (cards[logEntry.key].title === null) {
                                     cards[logEntry.key].title = ""
                                 }
-                                browser.assert.equal(text.value, cards[logEntry.key].title, "Title of card #" + (logEntry.key + 1).toString() + " does not match")
+                                browser.assert.equal(text.value, cards[logEntry.key].title, "Title of card #" + (logEntry.key + 1).toString())
                             });
                         } else if (Object.keys(cards[logEntry.key]).indexOf('title') == -1) {
                             // There is supposed to be a title here
