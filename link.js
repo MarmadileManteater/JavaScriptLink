@@ -88,11 +88,11 @@ define(["fs", "text!" + require.dirname + "/package.json", "text!" + process.cwd
                             }
                             file += fileContent;
                         } else if (ls[i].endsWith(".json")) {
-                            file += "\r\ndefine(\"" + "text!" + directory.replace(baseDir + "/", "").replace(baseDir, ".") + "/" + ls[i] + "\", [], function () {\r\n\treturn \"" + tabString(fileSystem.readFileSync(directory + "/" + ls[i]).toString().replaceAll(/[\\"]/g, '\\$&').replaceAll(/\u0000/g, '\\0').replaceAll("\r\n", "\\r\\n"),  2, true) + "\";\r\n});\r\n"
+                            file += "\r\ndefine(\"" + "text!" + directory.replace(baseDir + "/", "").replace(baseDir, ".") + "/" + ls[i] + "\", [], function () {\r\n\treturn \"" + tabString(fileSystem.readFileSync(directory + "/" + ls[i]).toString().replaceAll(/[\\"]/g, '\\$&').replaceAll(/\u0000/g, '\\0').replaceAll("\r", "\\\r").replaceAll("\n", "\\\n"),  2, true) + "\";\r\n});\r\n"
                         } else if (ls[i].endsWith(".html") && directory + "/" + ls[i] !== htmlFile) {
-                            file += "define(\"" + "text!" + directory.replace(baseDir + "/", "").replace(baseDir, ".")  + "/" + ls[i] + "\", [], function () {\r\n\treturn \"" + tabString((fileSystem.readFileSync(directory + "/" + ls[i])).toString().replaceAll(/[\\"]/g, '\\$&').replaceAll(/\u0000/g, '\\0').replaceAll("\r\n", "\\r\\n").replaceAll("\r\n", "\\r\\n").replaceAll("<", "\\<").replaceAll(">", "\\>").replaceAll("/script", "\\/script").toString(), 2, true) + "\";\r\n});\r\n"
+                            file += "define(\"" + "text!" + directory.replace(baseDir + "/", "").replace(baseDir, ".")  + "/" + ls[i] + "\", [], function () {\r\n\treturn \"" + tabString((fileSystem.readFileSync(directory + "/" + ls[i])).toString().replaceAll(/[\\"]/g, '\\$&').replaceAll(/\u0000/g, '\\0').replaceAll("\r", "\\\r").replaceAll("\n", "\\\n").replaceAll("<", "\\<").replaceAll(">", "\\>").replaceAll("/script", "\\/script").toString(), 2, true) + "\";\r\n});\r\n"
                         } else if ((ls[i].endsWith(".css") && directory + "/" + ls[i] !== htmlFile)) {
-                            file += "\r\ndefine(\"" + "text!" + directory.replace(baseDir + "/", "").replace(baseDir, ".") + "/" + ls[i] + "\", [], function () {\r\n\treturn \"" + tabString((fileSystem.readFileSync(directory + "/" + ls[i])).toString().replaceAll(/[\\"]/g, '\\$&').replaceAll(/\u0000/g, '\\0').replaceAll("\r\n", "\\r\\n").replaceAll("\r\n", "\\r\\n").toString(), 2, true) + "\";\r\n});\r\n"
+                            file += "\r\ndefine(\"" + "text!" + directory.replace(baseDir + "/", "").replace(baseDir, ".") + "/" + ls[i] + "\", [], function () {\r\n\treturn \"" + tabString((fileSystem.readFileSync(directory + "/" + ls[i])).toString().replaceAll(/[\\"]/g, '\\$&').replaceAll(/\u0000/g, '\\0').replaceAll("\r", "\\\r").replaceAll("\n", "\\\n").toString(), 2, true) + "\";\r\n});\r\n"
                         } else if ((ls[i].endsWith(".tmx") && directory + "/" + ls[i] !== htmlFile)) {
                             var fileNameSplit = ls[i].split(".");
                             fileNameSplit.pop();
@@ -100,7 +100,7 @@ define(["fs", "text!" + require.dirname + "/package.json", "text!" + process.cwd
                             var dataUrl = process.cwd() + "/" + directory + "/" + fileName;
                             dataUrl = dataUrl.replaceAll("\\", "/");
                             var fileObject = tmx.loadSync(dataUrl);
-                            file += "\r\ndefine(\"" + "tmx!" + directory.replace(baseDir + "/", "").replace(baseDir, ".") + "/" + fileName + "\", [], function () {\r\n\treturn " + tabString(JSON.stringify(fileObject, null, 2).replaceAll("\n", "\r\n").replaceAll(process.cwd().replaceAll("\\", "/") + "/" + baseDir.replace(/\.\//g, "") + "/", ""), 2, true) + ";\r\n});\r\n"
+                            file += "\r\ndefine(\"" + "tmx!" + directory.replace(baseDir + "/", "").replace(baseDir, ".") + "/" + fileName + "\", [], function () {\r\n\treturn " + tabString(JSON.stringify(fileObject, null, 2).replaceAll("\r", "\\\r").replaceAll("\n", "\\\n").replaceAll(process.cwd().replaceAll("\\", "/") + "/" + baseDir.replace(/\.\//g, "") + "/", ""), 2, true) + ";\r\n});\r\n"
                         } else if ((ls[i].endsWith(".png") || ls[i].endsWith(".mp3")) && embedImages) {
                             file += "\r\ndefine(\"" + "data-uri!" + directory.replace(baseDir + "/", "").replace(baseDir, ".") + "/" + ls[i] + "\", [], function () {\r\n\treturn \"" + toDataUri(directory + "/" + ls[i]).toString() + "\";\r\n});\r\n"
                         }

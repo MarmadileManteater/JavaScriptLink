@@ -12,7 +12,7 @@ describe('test', function() {
     }
     it('do the page logs match what should be expected given the example folder?', function(browser) {
       browser
-        .url('file://' + __dirname + '/output/output.html')
+        .url('file:///' + __dirname.toString().replaceAll('\\', '/') + '/output/output.html')
         .waitForElementVisible('.card', 4000)
         .elements('css selector', '.card-list [class="card"]', function (logEntries) {
             log(JSON.stringify(logEntries.value, null, 2))
@@ -21,7 +21,7 @@ describe('test', function() {
                     title: "JavaScript Link Example",
                     description: 
 `A CLI tool for transpiling a directory of resources into a target output file
-View on GitHubÂ»`
+View on GitHub»`
                 },
                 {
                     title: "Usage:",
@@ -85,7 +85,7 @@ This is how to retrieve data from a JSON file.`,
                     description: "This is a piece of data stored in local storage:",
                     referenceMedia: 
 `{
-  "location": "file:///C:/Users/Emma/Documents/Code/JavaScriptLink/output/output.html",
+  "location": "file:///` + __dirname.replaceAll("\\", "/") + `/output/output.html",
   "integer": 23
 }`
                 },
@@ -123,7 +123,7 @@ This is how to retrieve data from a JSON file.`,
                 }
             ];
             logEntries = logEntries.value;
-            browser.assert.equal(logEntries.length, cards.length, (logEntries.length > cards.length?"Too many":"Too few") + " logs based on the example folder");
+            browser.assert.equal(logEntries.length, cards.length, ((logEntries.length === cards.length)?"Just the right amount of":(logEntries.length > cards.length?"Too many":"Too few")) + " logs based on the example folder");
             for (var i = 0; i < logEntries.length; i++) {
                 var logEntry = logEntries[i];
                 logEntry.key = i;
@@ -137,11 +137,11 @@ This is how to retrieve data from a JSON file.`,
                                 if (cards[logEntry.key].title === null) {
                                     cards[logEntry.key].title = ""
                                 }
-                                browser.assert.equal(text.value, cards[logEntry.key].title, "Title of card #" + (logEntry.key + 1).toString() + " does not match")
+                                browser.assert.equal(text.value, cards[logEntry.key].title, "Title of card #" + (logEntry.key + 1).toString())
                             });
                         } else if (Object.keys(cards[logEntry.key]).indexOf('title') == -1) {
                             // There is supposed to be a title here
-                            browser.assert.not.equals(cards[logEntry.key].title, undefined, "There is supposed to be a title here")
+                            browser.assert.not.equals(cards[logEntry.key].title, undefined)
                         }
 
                     });
@@ -156,11 +156,11 @@ This is how to retrieve data from a JSON file.`,
                                 if (cards[logEntry.key].description === null) {
                                     cards[logEntry.key].description = ""
                                 }
-                                browser.assert.equal(text.value, cards[logEntry.key].description, "Description of card #" + (logEntry.key + 1).toString() + " does not match")
+                                browser.assert.equal(text.value, cards[logEntry.key].description, "Description of card #" + (logEntry.key + 1).toString())
                             });
                         } else if (Object.keys(cards[logEntry.key]).indexOf('description') == -1) {
                             // There is supposed to be a description here
-                            browser.assert.not.equals(cards[logEntry.key].description, undefined, "There is supposed to be a description here")
+                            browser.assert.not.equals(cards[logEntry.key].description, undefined)
                         }
 
                     });
@@ -176,14 +176,14 @@ This is how to retrieve data from a JSON file.`,
                                     cards[logEntry.key].referenceMedia = ""
                                 }
                                 if (cards[logEntry.key].referenceMedia.startsWith('data:image')) {
-                                    browser.assert.equal(text.value, cards[logEntry.key].referenceMedia, "Image of card #" + (logEntry.key + 1).toString() + " does not match")
+                                    browser.assert.equal(text.value, cards[logEntry.key].referenceMedia, "Image of card #" + (logEntry.key + 1).toString())
                                 }
                             });
                         } else if (Object.keys(cards[logEntry.key]).indexOf('referenceMedia') == -1) {
                             // There is supposed to be an image here
                             if (cards[logEntry.key].referenceMedia !== undefined && cards[logEntry.key].referenceMedia !== null) {
                                 if (cards[logEntry.key].referenceMedia.startsWith('data:image')) {
-                                    browser.assert.not.equals(cards[logEntry.key].referenceMedia, undefined, "There is supposed to be an image here")
+                                    browser.assert.not.equals(cards[logEntry.key].referenceMedia, undefined)
                                 }
                             }
                         }
@@ -203,14 +203,14 @@ This is how to retrieve data from a JSON file.`,
                                 if (!cards[logEntry.key].referenceMedia.startsWith('data:audio') && !cards[logEntry.key].referenceMedia.startsWith('data:image')) {
                                     log(text.value);
                                     log(text.value + "\r\n" + cards[logEntry.key].referenceMedia);
-                                    browser.assert.equal(text.value, cards[logEntry.key].referenceMedia, "Textarea of card #" + (logEntry.key + 1).toString() + " does not match")
+                                    browser.assert.equal(text.value, cards[logEntry.key].referenceMedia, "Textarea of card #" + (logEntry.key + 1).toString())
                                 }
                             });
                         } else if (Object.keys(cards[logEntry.key]).indexOf('referenceMedia') == -1) {
                             // There is supposed to be audio here
                             if (cards[logEntry.key].referenceMedia !== undefined && cards[logEntry.key].referenceMedia !== null) {
                                 if (!cards[logEntry.key].referenceMedia.startsWith('data:audio') && !cards[logEntry.key].referenceMedia.startsWith('data:image')) {
-                                    browser.assert.not.equals(cards[logEntry.key].referenceMedia, undefined, "There is supposed to be audio here")
+                                    browser.assert.not.equals(cards[logEntry.key].referenceMedia, undefined)
                                 }
                             }
                         }
@@ -228,14 +228,14 @@ This is how to retrieve data from a JSON file.`,
                                     cards[logEntry.key].referenceMedia = ""
                                 }
                                 if (cards[logEntry.key].referenceMedia.startsWith('data:audio')) {
-                                    browser.assert.equal(text.value, cards[logEntry.key].referenceMedia, "Audio of card #" + (logEntry.key + 1).toString() + " does not match")
+                                    browser.assert.equal(text.value, cards[logEntry.key].referenceMedia, "Audio of card #" + (logEntry.key + 1).toString())
                                 }
                             });
                         } else if (Object.keys(cards[logEntry.key]).indexOf('referenceMedia') == -1) {
                             // There is supposed to be audio here
                             if (cards[logEntry.key].referenceMedia !== undefined && cards[logEntry.key].referenceMedia !== null) {
                                 if (cards[logEntry.key].referenceMedia.startsWith('data:audio')) {
-                                    browser.assert.not.equals(cards[logEntry.key].referenceMedia, undefined, "There is supposed to be audio here")
+                                    browser.assert.not.equals(cards[logEntry.key].referenceMedia, undefined)
                                 }
                             }
                         }

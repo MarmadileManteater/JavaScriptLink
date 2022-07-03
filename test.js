@@ -35,12 +35,10 @@ require(["link", "fs", "html-validator", "child_process"], function (link, fileS
     }
     process.exec("npx nightwatch --env firefox", function (error, stdout, stderr) {
         if (error) {
-            console.log(error.message);
-            return;
+            throw new Error(error.message);
         }
         if (stderr) {
             console.log(stderr);
-            return;
         }
         console.log(stdout);
     });
