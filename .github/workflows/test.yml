@@ -52,6 +52,7 @@ jobs:
       - name: Publish results to pythonanywhere
         run: |
             curl https://marmadilemanteater.pythonanywhere.com/api/action/check-for-new-test-results
-      - run: |
+      - name: You can view the test results at https://marmadilemanteater.pythonanywhere.com/gh/javascriptlink/latest
+        run: |
           echo "You can view the test results at https://marmadilemanteater.pythonanywhere.com/gh/javascriptlink/latest"
           
