@@ -102,6 +102,9 @@ require(["text!data/swords.json", "builtins/storage", "builtins/loader", "data-u
         }
     }
     loader.onload(async function () {
+        if (document.querySelector('.card-list').children.length !== 0) {
+            document.querySelector('.card-list').innerHTML = "";
+        }
         var testField = await storage.get("test-field");
         if (testField === undefined || testField === null) {
             await storage.set("test-field", { location: window.location.href, integer: 23});
