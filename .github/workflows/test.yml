@@ -53,5 +53,5 @@ jobs:
         if: always()
         run: |
           curl https://marmadilemanteater.pythonanywhere.com/api/action/check-for-new-test-results
-          echo "You can view the test results at https://marmadilemanteater.pythonanywhere.com/gh/javascriptlink/latest"
+          echo -e "\n\nYou can view the test results at https://marmadilemanteater.pythonanywhere.com/gh/javascriptlink/latest"
           
