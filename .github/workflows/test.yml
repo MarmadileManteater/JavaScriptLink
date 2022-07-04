@@ -50,9 +50,10 @@ jobs:
           path: tests_output\nightwatch-html-report
           
       - name: Publish results to pythonanywhere
-        if: always()
-        run: |
-          curl https://marmadilemanteater.pythonanywhere.com/api/action/check-for-new-test-results
-          echo.
-          echo "You can view the test results at https://marmadilemanteater.pythonanywhere.com/gh/javascriptlink/latest"
+        uses: Azure/powershell@v1
+        with:
+          inlineScript:
+            curl https://marmadilemanteater.pythonanywhere.com/api/action/check-for-new-test-results
+            echo.
+            echo "You can view the test results at https://marmadilemanteater.pythonanywhere.com/gh/javascriptlink/latest"
           
