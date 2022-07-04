@@ -315,9 +315,10 @@ define(["fs", "text!" + require.dirname + "/package.json", "text!" + process.cwd
         var jlimports = [];
         var importedBuiltins = [];
         var index = 0;
-        if (finishedScript.match(/\"builtins\/(.*?)\"/g) !== null) {
-            while (index < finishedScript.match(/\"builtins\/(.*?)\"/g).length) {
-                var builtinName = finishedScript.match(/\"builtins\/(.*?)\"/g)[index].split("ins/")[1].split("\"")[0];
+        if (finishedScript.match(/['\"]builtins\/(.*?)['\"]/g) !== null) {
+            while (index < finishedScript.match(/['\"]builtins\/(.*?)['\"]/g).length) {
+                var builtinName = finishedScript.match(/['\"]builtins\/(.*?)['\"]/g)[index].split("ins/")[1];
+                builtinName = builtinName.substring(0, builtinName.length - 1); // remove the end quotes
                 var builtins = fileSystem.readdirSync(require.dirname + "/builtins");
                 if (builtins.indexOf(builtinName + ".js") !== -1 && importedBuiltins.indexOf(builtinName) === -1) {
                     // This is a valid builtin
