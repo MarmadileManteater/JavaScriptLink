@@ -2,20 +2,11 @@
 describe('test', function() {
 
     // test() and specify() is also available
-    var log = function () {
-        var fs = require('fs')
-        var content = "";
-        for (var i = 0; i < arguments.length; i++) {
-            content += arguments[i] + "\r\n";
-        }
-        fs.writeFileSync('log', content, 'utf-8');
-    }
     it('do the page logs match what should be expected given the example folder?', function(browser) {
       browser
         .url('file:///' + __dirname.toString().replaceAll('\\', '/') + '/output/output.html')
         .waitForElementVisible('.card', 4000)
         .elements('css selector', '.card-list [class="card"]', function (logEntries) {
-            log(JSON.stringify(logEntries.value, null, 2))
             var cards = [
                 {
                     title: "JavaScript Link Example",
@@ -147,7 +138,6 @@ This is how to retrieve data from a JSON file.`,
                     });
 
                     browser.element('css selector', '.card-list [class="card"]:nth-child(' + (logEntry.key + 1).toString() + ') p', function (descriptionElement) {
-                        log(JSON.stringify(descriptionElement, null, 2))
                         if (descriptionElement.status === 0) {
                             browser.elementIdText(descriptionElement.value[Object.keys(descriptionElement.value)[0]], function (text) {
                                 if (Object.keys(cards[logEntry.key]).indexOf('description') == -1) {
@@ -166,7 +156,6 @@ This is how to retrieve data from a JSON file.`,
                     });
 
                     browser.element('css selector', '.card-list [class="card"]:nth-child(' + (logEntry.key + 1).toString() + ') img', function (imageElement) {
-                        log(JSON.stringify(imageElement, null, 2))
                         if (imageElement.status === 0) {
                             browser.elementIdAttribute(imageElement.value[Object.keys(imageElement.value)[0]], "src", function (text) {
                                 if (Object.keys(cards[logEntry.key]).indexOf('referenceMedia') == -1) {
@@ -191,7 +180,6 @@ This is how to retrieve data from a JSON file.`,
                     });
 
                     browser.element('css selector', '.card-list [class="card"]:nth-child(' + (logEntry.key + 1).toString() + ') textarea', function (textareaElement) {
-                        log(JSON.stringify(textareaElement, null, 2))
                         if (textareaElement.status === 0) {
                             browser.elementIdText(textareaElement.value[Object.keys(textareaElement.value)[0]], function (text) {
                                 if (Object.keys(cards[logEntry.key]).indexOf('referenceMedia') == -1) {
@@ -201,8 +189,6 @@ This is how to retrieve data from a JSON file.`,
                                     cards[logEntry.key].referenceMedia = ""
                                 }
                                 if (!cards[logEntry.key].referenceMedia.startsWith('data:audio') && !cards[logEntry.key].referenceMedia.startsWith('data:image')) {
-                                    log(text.value);
-                                    log(text.value + "\r\n" + cards[logEntry.key].referenceMedia);
                                     browser.assert.equal(text.value, cards[logEntry.key].referenceMedia, "Textarea of card #" + (logEntry.key + 1).toString())
                                 }
                             });
@@ -218,7 +204,6 @@ This is how to retrieve data from a JSON file.`,
                     });
 
                     browser.element('css selector', '.card-list [class="card"]:nth-child(' + (logEntry.key + 1).toString() + ') audio', function (audioElement) {
-                        log(JSON.stringify(audioElement, null, 2))
                         if (audioElement.status === 0) {
                             browser.elementIdAttribute(audioElement.value[Object.keys(audioElement.value)[0]], "src", function (text) {
                                 if (Object.keys(cards[logEntry.key]).indexOf('referenceMedia') == -1) {
