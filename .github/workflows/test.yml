@@ -49,3 +49,7 @@ jobs:
           name: nightwatch-test-results-${{ env.PACKAGE_VERSION }}-${{ github.run_number }}
           path: tests_output\nightwatch-html-report
           
+      - name: Publish results to pythonanywhere
+        run: |
+          curl https://marmadilemanteater.pythonanywhere.com/api/action/check-for-new-test-results
+          
