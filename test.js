@@ -23,15 +23,17 @@ require(["link", "fs", "html-validator", "child_process"], function (link, fileS
     try {
         validator(options).then(function (result) {
             console.log("HTML Validator Results:")
-            console.log(JSON.stringify(result, null, 4));
-            if (result.errors.length !== 0) {
-                throw result;
+            var results = JSON.stringify(result, null, 4);
+            console.log(results);
+            try {
+                fileSystem.mkdirSync("tests_output");
+            } catch {
+
             }
+            fileSystem.writeFileSync("tests_output/html-validator-results.json", results);
         })['catch'](function (error) {
-            throw error;
         });
     } catch (error) {
-        throw error
     }
     process.exec("npx nightwatch --env firefox", function (error, stdout, stderr) {
         if (error) {
