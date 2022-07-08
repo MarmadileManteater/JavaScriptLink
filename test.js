@@ -43,5 +43,8 @@ require(["link", "fs", "html-validator", "child_process"], function (link, fileS
             console.log(stderr);
         }
         console.log(stdout);
+        var darkModeTestStyles = fileSystem.readFileSync('test/style.css');
+        var nightwatchTestStyles = fileSystem.readFileSync('tests_output/nightwatch-html-report/css/style.css')
+        fileSystem.writeFileSync('tests_output/nightwatch-html-report/css/style.css', nightwatchTestStyles + "\n" + darkModeTestStyles)
     });
 })
