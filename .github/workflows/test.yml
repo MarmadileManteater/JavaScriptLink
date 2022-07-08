@@ -42,16 +42,25 @@ jobs:
         run: |
           cp output/output.html tests_output/nightwatch-html-report
 
-      - name: Upload the test results
+      - name: Copy the JSON test results to the results directory
+        run: |
+          cp tests_output/*_nightwatch-tests.json tests_output/nightwatch-html-report/results.json
+
+      - name: Copy the XML test results to the results directory
+        run: |
+          cp tests_output/*_nightwatch-tests.xml tests_output/nightwatch-html-report/results.xml
+
+      - name: Upload the HTML test results
         uses: actions/upload-artifact@v2
         if: always()
         with:
           name: nightwatch-test-results-${{ env.PACKAGE_VERSION }}-${{ github.run_number }}
           path: tests_output\nightwatch-html-report
-          
+
       - name: Publish results to pythonanywhere
         run: |
             curl https://marmadilemanteater.pythonanywhere.com/api/action/check-for-new-test-results
+
       - name: You can view the test results at https://marmadilemanteater.pythonanywhere.com/gh/javascriptlink/latest
         run: |
           echo "You can view the test results at https://marmadilemanteater.github.io/javascriptlink/nightwatch-test-results-${{ env.PACKAGE_VERSION }}-${{ github.run_number }}"
