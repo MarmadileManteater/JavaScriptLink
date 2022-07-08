@@ -16,7 +16,7 @@ describe('HTML Validation', function () {
     }
 })
 
-describe('test', function() {
+describe('Page functionality', function() {
 
     // test() and specify() is also available
 
@@ -214,7 +214,7 @@ This is how to retrieve data from a JSON file.`,
                             // There is supposed to be audio here
                             if (cards[logEntry.key].referenceMedia !== undefined && cards[logEntry.key].referenceMedia !== null) {
                                 if (!cards[logEntry.key].referenceMedia.startsWith('data:audio') && !cards[logEntry.key].referenceMedia.startsWith('data:image')) {
-                                    browser.verify.not.equals(cards[logEntry.key].referenceMedia, undefined)
+                                    browser.verify.not.equal(cards[logEntry.key].referenceMedia, undefined)
                                 }
                             }
                         }
@@ -238,7 +238,7 @@ This is how to retrieve data from a JSON file.`,
                             // There is supposed to be audio here
                             if (cards[logEntry.key].referenceMedia !== undefined && cards[logEntry.key].referenceMedia !== null) {
                                 if (cards[logEntry.key].referenceMedia.startsWith('data:audio')) {
-                                    browser.verify.not.equals(cards[logEntry.key].referenceMedia, undefined)
+                                    browser.verify.not.equal(cards[logEntry.key].referenceMedia, undefined)
                                 }
                             }
                         }
@@ -248,6 +248,15 @@ This is how to retrieve data from a JSON file.`,
             }
         });
     });
-  
+    
+    it('Http(s) request should throw a meaningful error when it is used from the local filesystem', function(browser) {
+        browser
+            .url('file:///' + __dirname.toString().replaceAll('\\', '/') + '/output/output.html')        
+            .waitForElementVisible('body', 400000)
+            .getAttribute('span[class="errors"]', 'data-exception', function (error) {
+                browser.verify.equal(error.value, "The request to file:///" + __dirname.toString().replaceAll('\\', '/') + "/output/output.html can not be processed from the local filesystem.");
+            })
+    });
+
   });
   

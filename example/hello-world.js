@@ -25,7 +25,7 @@ require("data-uri");
 window = { location: { href: __dirname }}
 // #endregion NodeJS Require
 
-require(["text!data/swords.json", "builtins/storage", "builtins/loader", "data-uri!img/parallax-forest-preview.png", "data-uri!music/desert_loop.mp3", "text!templates/card.html"], async function (swordsJSON, storage, loader, imageUri , desertLoopUri, cardHTML) {
+require(["text!data/swords.json", "builtins/storage", "builtins/loader", "builtins/http-request", "data-uri!img/parallax-forest-preview.png", "data-uri!music/desert_loop.mp3", "text!templates/card.html"], async function (swordsJSON, storage, loader, httpRequest, imageUri , desertLoopUri, cardHTML) {
     var createElementsFromHTML = function (html) {
         var div = document.createElement("div");
         div.innerHTML = html;
@@ -122,6 +122,12 @@ require(["text!data/swords.json", "builtins/storage", "builtins/loader", "data-u
         print("", null, imageUri, 6, { "author": "ansimuz", "source": "https://opengameart.org/content/forest-background" });
         print("This is how to display a linked audio file.", null, `require(["data-uri!music/desert_loop.mp3"], async function (desertLoop) {\r  var audio = document.createElement('audio');\r  audio.src = desertLoop;\r  document.body.appendChild(audio);\r});`, 6);
         print("", null, desertLoopUri, 6, { "author": "iamoneabe", "source": "https://opengameart.org/content/desert-loop" });
+        try {
+            console.log(await httpRequest(window.location.href));
+        } catch (exception) {
+            document.querySelector('.errors').setAttribute('data-exception', exception);
+        }
     });
+    
 
 });
