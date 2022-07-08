@@ -252,7 +252,7 @@ This is how to retrieve data from a JSON file.`,
     it('Http(s) request should throw a meaningful error when it is used from the local filesystem', function(browser) {
         browser
             .url('file:///' + __dirname.toString().replaceAll('\\', '/') + '/output/output.html')        
-            .waitForElementVisible('body', 400000)
+            .waitForElementVisible('body', 4000)
             .getAttribute('span[class="errors"]', 'data-exception', function (error) {
                 browser.verify.equal(error.value, "The request to file:///" + __dirname.toString().replaceAll('\\', '/') + "/output/output.html can not be processed from the local filesystem.");
             })
