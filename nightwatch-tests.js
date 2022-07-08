@@ -249,7 +249,7 @@ This is how to retrieve data from a JSON file.`,
         });
     });
     
-    it('Http(s) request should throw a meaningful error when it is used from the local filesystem', function(browser) {
+    it('Do HTTP(s) requests throw a meaningful error when they are made from the local filesystem?', function(browser) {
         browser
             .url('file:///' + __dirname.toString().replaceAll('\\', '/') + '/output/output.html')        
             .waitForElementVisible('body', 4000)
